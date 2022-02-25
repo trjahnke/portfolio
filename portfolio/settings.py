@@ -33,7 +33,7 @@ if os.environ['DJANGO_DEBUG'] == 'True':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['tristanjahnke.com', '.herokuapp.com']
 
 
 # Application definition
