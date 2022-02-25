@@ -1,0 +1,29 @@
+/* CSS HEX */
+:root {
+--oxford-blue: #0a122aff;
+--bright-navy-blue: #3e78b2ff;
+--medium-aquamarine: #3ddc97ff;
+--white: #fcfcfcff;
+--sizzling-red: #ff495cff;
+}
+
+body {
+  background-color: var(--oxford-blue);
+  color: var(--bright-navy-blue);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-primary {
+  background-color: var(--bright-navy-blue);
+  border-color: var(--bright-navy-blue);
+  color: var(--white);
+}
+
+a {
+  color: var(--bright-navy-blue);
+  text-decoration: none;
+}
