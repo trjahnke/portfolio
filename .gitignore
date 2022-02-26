@@ -1,4 +1,5 @@
 db.sqlite3
 example.json
+env/
 .env
 __pycache__/

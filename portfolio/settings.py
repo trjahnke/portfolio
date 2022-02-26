@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-load_dotenv(".env")
+load_dotenv("env/non-prod.env")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,7 +33,8 @@ if os.environ['DJANGO_DEBUG'] == 'True':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['tristanjahnke.com', '.tristanjahnke.com', '.herokuapp.com']
+ALLOWED_HOSTS = ['tristanjahnke.com',
+                 '.tristanjahnke.com', '.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
