@@ -17,6 +17,10 @@ body {
   padding: 0;
 }
 
+.container {
+  margin-bottom: 1%;
+}
+
 .btn-primary {
   background-color: var(--bright-navy-blue);
   border-color: var(--bright-navy-blue);
