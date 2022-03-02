@@ -105,3 +105,5 @@ def get_repos():
     conn.close()
 
     return repos
+
+get_repos()
