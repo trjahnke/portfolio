@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['tristanjahnke.com',
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -106,6 +107,11 @@ DATABASES = {
 #     }
 # }
 # CACHE_TTL = 60 * 15
+
+
+CRONJOBS = [
+    ('*/15 * * * *', 'portfolio.cron.get_repos'),
+]
 
 
 # Password validation

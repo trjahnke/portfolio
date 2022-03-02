@@ -21,9 +21,20 @@ body {
   margin-bottom: 1%;
 }
 
+.btn-group {
+  width: 80%;
+  margin-left: 10%;
+}
+
 .btn-primary {
   background-color: var(--bright-navy-blue);
   border-color: var(--bright-navy-blue);
+  color: var(--white);
+}
+
+.btn-homepage {
+  background-color: var(--medium-aquamarine);
+  border-color: var(--medium-aquamarine);
   color: var(--white);
 }
 

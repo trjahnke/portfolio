@@ -11,12 +11,14 @@
                 <div class="card-header">
                     <h3><i class="fa-solid fa-code-branch"></i> {{ repo.name }}</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <p class="card-text">{{ repo.description }}</p>
-                    <a href="{{ repo.html_url }}" class="btn btn-primary">Source Code</a>
-                    {% if repo.homepage %}
-                    <a href="{{ repo.homepage }}" class="btn btn-primary">Homepage</a>
-                    {% endif %}
+                    <div class="btn-group mt-auto" role="group" aria-label="Buttone group for source code and homepage">
+                        <a href="{{ repo.html_url }}" class="btn btn-primary">Source Code</a>
+                        {% if repo.homepage %}
+                        <a href="{{ repo.homepage }}" class="btn btn-homepage">Homepage</a>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="card-footer text-muted">
                     <p>Last Updated: {{ repo.updated_at }}</p>

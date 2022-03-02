@@ -1,25 +1,32 @@
 from django.shortcuts import render
 import requests
 from datetime import datetime
+from .cron import get_repos
+import psycopg2.extras
+import os
 
 
 def landing(request):
-    pinned_repos = ['corgi_texter', 'trjahnke', 'homelab']
-    excluded_repos = ['']
+    # Pull repos from database
+    # Connect to the database
+    conn = psycopg2.connect(database=os.environ['DJANGO_DB_NAME'], user=os.environ['DB_USER'],
+                            password=os.environ['DB_PASSWORD'], host=os.environ['DB_HOST'], port=os.environ['DB_PORT'])
 
-    repos = requests.get('https://api.github.com/users/trjahnke/repos')
-    repos = repos.json()
+    # Save repos to database
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-    for repo in repos:
-        if repo['name'] in excluded_repos:
-            repos.remove(repo)
-            break
+    # Fetch the repos table from the database and convert it to a list
+    cur.execute("SELECT * FROM repos")
+    db_repos = cur.fetchall()
+    repos = []
 
+    for repo in db_repos:
+        updated_at = repo['updated_at'].strip()
         repo['updated_at'] = datetime.strptime(
-            repo['updated_at'], '%Y-%m-%dT%H:%M:%SZ')
+            updated_at, '%Y-%m-%dT%H:%M:%SZ')
 
-        if repo['name'] in pinned_repos:
-            temp = repo
-            repos.insert(0, repos.pop(repos.index(repo)))
+        repos.append(repo)
+
+    conn.close()
 
     return render(request, 'landing.html', {'repos': repos})
