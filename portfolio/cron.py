@@ -29,9 +29,7 @@ class APILimitError(Exception):
 
 
 def fields_str():
-    fields_str = ""
-    for field in FIELDS:
-        fields_str += field + " " + FIELDS[field] + ", "
+    fields_str = "".join(f'{field} {FIELDS[field]}, ' for field in FIELDS)
     fields_str = fields_str[:-2]
     return fields_str
 
