@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+
 from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-load_dotenv(".env")
+load_dotenv("env/non-prod.env")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,17 +29,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ['DJANGO_DEBUG'] == 'True':
-    DEBUG = True
-else:
-    DEBUG = False
-
-ALLOWED_HOSTS = ['tristanjahnke.com', '.tristanjahnke.com', '.herokuapp.com']
+DEBUG = os.environ['DJANGO_DEBUG'] == 'True'
+ALLOWED_HOSTS = ['tristanjahnke.com',
+                 '.tristanjahnke.com', '.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -94,6 +93,22 @@ DATABASES = {
         'PORT': os.environ['DB_PORT'],
     }
 }
+
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://:p55e3720c36d4797f6b4a177312d3ce5b50ac5a1df3b416635eda3d7a9bf43a3c@ec2-54-92-172-5.compute-1.amazonaws.com:22490/0",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
+# CACHE_TTL = 60 * 15
+
+
+CRONJOBS = [
+    ('*/15 * * * *', 'portfolio.cron.get_repos'),
+]
 
 
 # Password validation
